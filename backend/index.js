@@ -22,7 +22,7 @@ app.post('/books', async (req, res) => {
       !req.body.publishYear
     ) {
       return res.status(400).send({
-        message: 'Please provide all required fields: title, author, and year published',
+        message: 'Please provide all required fields: title, author, and publishYear',
       });
     }
     const newBook = {
@@ -34,7 +34,7 @@ app.post('/books', async (req, res) => {
     return res.status(201).send(book);
   } catch (error) {
     console.log(error.message);
-    response.status(500).send({ message: error.message });
+    res.status(500).send({ message: error.message });
   }
 });
 
@@ -57,7 +57,36 @@ app.get('/books/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const book = await Book.findById(id);
+    if(book === null ) {
+      return res.status(404).send({ message: 'book not found' });
+    }
     return res.status(200).json(book);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+// HTTP route to update (PUT) a book by id in db:
+app.put('/books/:id', async (req, res) => {
+  try {
+    if (
+      !req.body.title ||
+      !req.body.author ||
+      !req.body.publishYear
+    ) {
+      return res.status(400).send({
+        message: 'Please be sure to send ALL required fields: title, author, publishYear'
+      });
+    }
+    const { id } = req.params;
+    const result = await Book.findByIdAndUpdate(id, req.body);
+    if (!result) {
+      return res.status(404).json({ message: 'Book not found' });
+    }
+
+    return res.status(200).send({ message: 'Book updated successfully.' });
+
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });
