@@ -57,7 +57,7 @@ app.get('/books/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const book = await Book.findById(id);
-    if(book === null ) {
+    if (book === null) {
       return res.status(404).send({ message: 'book not found' });
     }
     return res.status(200).json(book);
@@ -87,6 +87,21 @@ app.put('/books/:id', async (req, res) => {
 
     return res.status(200).send({ message: 'Book updated successfully.' });
 
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+// HTTP route to DELETE book by id:
+app.delete('/books/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await Book.findByIdAndDelete(id);
+    if (!result) {
+      return res.status(404).json({ message: 'Err 404: Book not found' });
+    }
+    return res.status(200).send({ message: 'Book was deleted from database.' });
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });
