@@ -20,4 +20,11 @@ In building this application, I learned about CORS policy:
 More information about CORS can be found at *[AWS](https://aws.amazon.com/what-is/cross-origin-resource-sharing/)*. 
 
 The server can check Origins, Methods, and Headers; then allow or deny the request
-NodeJS offers some solutions to this problem. 
+NodeJS offers some solutions to this problem.
+
+## React
+
+A few options to use ReactJS:
+
+- CRA `create react app`
+- instead, used Vite in this project `npm create vite@latest`
