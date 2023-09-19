@@ -1,6 +1,12 @@
 import React from "react";
 import { Routes, Route } from 'react-router-dom';
-import { BookDetails, CreateBook, DeleteBook, EditBook, Home } from './pages';
+
+// import all the route details from pages folder:
+import BookDetails from "./pages/BookDetails";
+import CreateBook from "./pages/CreateBook";
+import DeleteBook from "./pages/DeleteBook";
+import EditBook from "./pages/EditBook";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
@@ -12,6 +18,6 @@ const App = () => {
       <Route path='/books/delete/:id' element={<DeleteBook />} />
     </Routes>
   )
-}
+};
 
-export default App
+export default App;
