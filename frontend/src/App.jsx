@@ -1,14 +1,15 @@
 import React from "react";
 import { Routes, Route } from 'react-router-dom';
+import { BookDetails, CreateBook, DeleteBook, EditBook, Home } from './pages';
 
 const App = () => {
   return (
     <Routes>
-      <Router path='' element={} />
-      <Router path='' element={} />
-      <Router path='' element={} />
-      <Router path='' element={} />
-      <Router path='' element={} />
+      <Route path='/' element={<Home />} />
+      <Route path='/books/create' element={<CreateBook />} />
+      <Route path='/books/details/:id' element={<BookDetails />} />
+      <Route path='/books/edit/:id' element={<EditBook />} />
+      <Route path='/books/delete/:id' element={<DeleteBook />} />
     </Routes>
   )
 }
